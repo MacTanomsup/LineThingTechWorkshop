@@ -93,6 +93,7 @@ function liffGetUserService(service) {
     service.getCharacteristic(BTN_CHARACTERISTIC_UUID).then(characteristic => {
         liffGetButtonStateCharacteristic(characteristic);
     }).catch(error => {
+        document.getElementById("debug").innerHTML = "error";
     });
 
     service.getCharacteristic(SCORE_CHARACTERISTIC_UUID).then(characteristic => {
