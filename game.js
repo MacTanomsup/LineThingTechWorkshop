@@ -42,6 +42,7 @@ function liffCheckAvailablityAndDo(callbackIfAvailable) {
             setTimeout(() => liffCheckAvailablityAndDo(callbackIfAvailable), 10000);
         }
     }).catch(error => {
+        document.getElementById("debug").innerHTML = "error";
     });;
 }
 
