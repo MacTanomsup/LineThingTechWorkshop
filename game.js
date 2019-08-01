@@ -47,8 +47,10 @@ function liffCheckAvailablityAndDo(callbackIfAvailable) {
 
 function liffRequestDevice() {
     console.log("requesting");
+    document.getElementById("debug").innerHTML = "requesting";
     liff.bluetooth.requestDevice().then(device => {
         console.log("connecting");
+        document.getElementById("debug").innerHTML = "connecting";
         liffConnectToDevice(device);
     }).catch(error => {
     });
@@ -57,6 +59,7 @@ function liffRequestDevice() {
 function liffConnectToDevice(device) {
     device.gatt.connect().then(() => {
         console.log("connected to " + device.name)
+        document.getElementById("debug").innerHTML = "connected to " + device.name;
 
         device.gatt.getPrimaryService(USER_SERVICE_UUID).then(service => {
             liffGetUserService(service);
@@ -114,8 +117,11 @@ function liffGetButtonStateCharacteristic(characteristic) {
     // (Get notified when button state changes)
     characteristic.startNotifications().then(() => {
         console.log("Starting Notifications")
+        document.getElementById("debug").innerHTML = "Starting Notifications";
         characteristic.addEventListener('characteristicvaluechanged', e => {
             const val = (new Uint8Array(e.target.value.buffer))[0];
+            document.getElementById("debug").innerHTML = "Val = " + val;
+            document.getElementById("debug2").innerHTML = "state.current = " + state.current;
             if (val > 0) {
                     switch(state.current){
                         case state.getReady:
