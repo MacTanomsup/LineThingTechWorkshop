@@ -65,11 +65,13 @@ function liffConnectToDevice(device) {
         device.gatt.getPrimaryService(USER_SERVICE_UUID).then(service => {
             liffGetUserService(service);
         }).catch(error => {
+            document.getElementById("debug").innerHTML = "error 68";
         });
         
         device.gatt.getPrimaryService(PSDI_SERVICE_UUID).then(service => {
             liffGetPSDIService(service);
         }).catch(error => {
+            document.getElementById("debug").innerHTML = "error 74";
         });
 
         // Device disconnect callback
